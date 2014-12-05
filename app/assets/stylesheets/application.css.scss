@@ -28,3 +28,10 @@ background-color: #f7f7f9;
 border: 1px solid #e1e1e8;
 border-radius: 4px;
 }
+
+.show-grid [class^=col-] {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 1px solid #ddd;
+  border: 1px solid rgba(86,61,124,.2);
+}

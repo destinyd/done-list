@@ -1,25 +1,18 @@
-<h1>Listing targets</h1>
+<h1>目标列表</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @targets.each do |target| %>
-      <tr>
-        <td><%= target.description %></td>
-        <td><%= link_to 'Show', target %></td>
-        <td><%= link_to 'Edit', edit_target_path(target) %></td>
-        <td><%= link_to 'Destroy', target, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Target', new_target_path %>
+<% if @targets.any? %>
+  <% @targets.each do |target| %>
+    <div class="row show-grid">
+      <div class="col-xs-9">
+        <%= link_to target.description, target %>
+      </div>
+      <div class="col-xs-3">
+        <%= target.tasks.count %>
+      </div>
+    </div>
+  <% end -%>
+<% else %>
+  <h3>想达成的目标是？</h3>
+<% end %>
+<p>  </p>
+<%= link_to '+ 点击添加', new_target_path, class: 'btn btn-primary btn-block' %>

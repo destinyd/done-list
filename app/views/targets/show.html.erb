@@ -1,9 +1,13 @@
-<p id="notice"><%= notice %></p>
+<h1><%= @target.description %></h1>
 
-<p>
-  <strong>Description:</strong>
-  <%= @target.description %>
-</p>
+<div class="row show-grid">
+  <% @target.tasks.each do |task| %>
+    <div class="col-xs-12">
+      <%= task.description %>
+    </div>
+  <% end -%>
+</div>
 
-<%= link_to 'Edit', edit_target_path(@target) %> |
-<%= link_to 'Back', targets_path %>
+<p>  </p>
+
+<%= link_to '修改', edit_target_path(@target), class: 'btn btn-primary btn-block' %>
