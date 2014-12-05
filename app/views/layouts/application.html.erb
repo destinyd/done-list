@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>DoneList</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-
-<%= yield %>
-
-</body>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "占位图片服务" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "占位图片服务" %>">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= yield(:head) %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body data-spy="scroll" data-target=".bs-docs-sidebar">
+    <header>
+      <%= render 'layouts/navigation' %>
+    </header>
+    <main role="main">
+      <div class="container" id="container">
+        <%= render 'layouts/messages' %>
+        <%= yield %>
+      </div>
+    </main>
+  </body>
 </html>

@@ -1,0 +1,7 @@
+<h2>登录</h2>
+
+<%- if devise_mapping.omniauthable? %>
+  <%- resource_class.omniauth_providers.each do |provider| %>
+    <%= link_to "通过新浪微博登录", omniauth_authorize_path(resource_name, provider), class: 'btn btn-primary' %><br />
+  <% end -%>
+<% end -%>

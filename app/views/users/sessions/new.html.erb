@@ -1,0 +1,21 @@
+<h2>登录</h2>
+
+<div class='page-sign-in'>
+  <form action='/sign_in' method='post'>
+    <div class='intro'>
+      <div class='s2'>
+        <span class='si'>4ye</span>
+        <span>Collector</span>
+      </div>
+      <div class='s3'>
+        <span>收集和管理你的网址</span>
+      </div>
+    </div>
+    <div class='ct'>
+      <%= link_to omniauth_authorize_path(resource_name, provider), class: 'btn weibo-auth' do %>
+        <i class='fa fa-weibo'></i>
+        <span>微博账号登录</span>
+      <% end -%>
+    </div>
+  </form>
+</div>

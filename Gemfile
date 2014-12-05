@@ -40,7 +40,7 @@ gem "mongoid", "4.0.0"
 gem 'bootstrap-sass'
 gem 'devise'
 gem 'devise-i18n'
-gem 'figaro', '>= 1.0.0.rc1'
+gem 'figaro', '>= 1.0.0'
 gem 'simple_form'
 
 group :development do
@@ -54,3 +54,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-rescue'
 end
+
+gem 'omniauth'
+gem 'omniauth-weibo-oauth2'
+gem 'weibo_2'
