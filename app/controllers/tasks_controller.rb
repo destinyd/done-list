@@ -5,13 +5,13 @@ class TasksController < ApplicationController
   respond_to :html
 
   def index
-    @tasks = Task.all
+    @tasks = Task.recent
     respond_with(@tasks)
   end
 
-  def show
-    respond_with(@task)
-  end
+  #def show
+    #respond_with(@task)
+  #end
 
   def new
     @task = Task.new

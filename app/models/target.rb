@@ -6,6 +6,8 @@ class Target
 
   validates_presence_of :description
 
+  scope :recent, -> {order("id desc")}
+
   def to_s
     description
   end

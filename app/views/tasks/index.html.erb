@@ -4,25 +4,26 @@
   <table class="table table-bordered">
     <tbody>
       <% @tasks.group_by{|t| t.created_at.strftime("%Y-%m-%d")}.each do |date, tasks| %>
+        <% first_task = tasks.first %>
         <tr>
           <td rowspan="<%= tasks.count %>" class="text-center" style="vertical-align: middle;">
-            <p> 周<%= tasks.first.finished_at.try(:wday) %> </p>
-            <p> <%= tasks.first.finished_at.try(:year) %> </p>
+            <p> 周<%= first_task.finished_at.try(:wday) %> </p>
+            <p> <%= first_task.finished_at.try(:year) %> </p>
             <% if date == Time.now.strftime("%Y-%m-%d") %>
-              <p> 今天 </p>
+              <h3 class="text-primary"> 今天 </h3>
             <% elsif date == 1.day.ago.strftime("%Y-%m-%d") %>
-              <p> 昨天 </p>
+              <h3 class="text-primary"> 昨天 </h3>
             <% end -%>
-            <p> <%= Time.now.strftime("%m-%d") %> </p>
+            <p class="text-primary"> <%= first_task.finished_at.strftime("%m-%d") %> </p>
           </td>
           <td>
-            <%= link_to tasks.first.description, tasks.first %>
+            <%= link_to first_task.description, edit_task_path(first_task) %>
           </td>
         </tr>
         <% tasks[1..-1].each do |task| %>
           <tr>
             <td>
-              <%= link_to task.description, task %>
+              <%= link_to task.description, edit_task_path(task) %>
             </td>
           </tr>
         <% end -%>

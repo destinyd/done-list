@@ -58,3 +58,5 @@ end
 gem 'omniauth'
 gem 'omniauth-weibo-oauth2'
 gem 'weibo_2'
+gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
+gem 'momentjs-rails', '>= 2.8.1', :github => 'derekprior/momentjs-rails'

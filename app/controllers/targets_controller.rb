@@ -5,7 +5,7 @@ class TargetsController < ApplicationController
   respond_to :html
 
   def index
-    @targets = Target.all
+    @targets = Target.recent
     respond_with(@targets)
   end
 
