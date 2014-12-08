@@ -43,6 +43,6 @@ class TargetsController < ApplicationController
     end
 
     def target_params
-      params.require(:target).permit(:description)
+      params.require(:target).permit(:description, task_ids: [])
     end
 end
