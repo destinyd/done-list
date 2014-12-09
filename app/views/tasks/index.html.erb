@@ -31,7 +31,10 @@
     </tbody>
   </table>
 <% else %>
-  <h3>今天搞定了哪些任务？</h3>
+  <div class="text-center">
+    <h3>今天搞定了哪些任务？</h3>
+    <%= image_tag "write.png" %>
+  </div>
 <% end %>
 <p>  </p>
 <%= link_to '+ 点击添加', new_task_path, class: 'btn btn-primary btn-block' %>
