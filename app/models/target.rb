@@ -3,6 +3,7 @@ class Target
   include Mongoid::Timestamps
   field :description, type: String
   field :tasks_count, type: Integer, default: 0
+  belongs_to :user
   has_and_belongs_to_many :tasks
 
   validates_presence_of :description

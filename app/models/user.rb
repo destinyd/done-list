@@ -38,6 +38,9 @@ class User
   field :uid,    type: String
   field :nickname,    type: String
 
+  has_many :tasks
+  has_many :targets
+
 
   # https://github.com/mongoid/mongoid/issues/3626#issuecomment-64700154
   def self.serialize_from_session(key, salt)

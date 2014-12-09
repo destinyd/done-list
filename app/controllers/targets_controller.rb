@@ -5,7 +5,7 @@ class TargetsController < ApplicationController
   respond_to :html
 
   def index
-    @targets = Target.important
+    @targets = current_user.targets.important
     respond_with(@targets)
   end
 
@@ -14,7 +14,7 @@ class TargetsController < ApplicationController
   end
 
   def new
-    @target = Target.new
+    @target = current_user.targets.new
     respond_with(@target)
   end
 
@@ -22,7 +22,7 @@ class TargetsController < ApplicationController
   end
 
   def create
-    @target = Target.new(target_params)
+    @target = current_user.targets.new(target_params)
     @target.save
     respond_with(@target)
   end
@@ -39,7 +39,7 @@ class TargetsController < ApplicationController
 
   private
     def set_target
-      @target = Target.find(params[:id])
+      @target = current_user.targets.find(params[:id])
     end
 
     def target_params

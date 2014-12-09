@@ -3,6 +3,7 @@ class Task
   include Mongoid::Timestamps
   field :description, type: String
   field :finished_at, type: Time
+  belongs_to :user
   has_and_belongs_to_many :targets
 
   validates_presence_of :description
