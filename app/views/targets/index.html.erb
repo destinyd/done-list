@@ -1,16 +1,25 @@
 <h1>目标列表</h1>
 
 <% if @targets.any? %>
-  <% @targets.each do |target| %>
-    <div class="row show-grid">
-      <div class="col-xs-9">
-        <%= link_to target.description, target %>
-      </div>
-      <div class="col-xs-3">
-        <%= target.tasks.count %>
-      </div>
-    </div>
-  <% end -%>
+  <table class="table table-bordered">
+    <% @targets.each_with_index do |target, index| %>
+      <tr>
+        <td style="vertical-align: middle;">
+          <%= link_to target.description, target %> <br />
+          <% if 5- index > 0 %>
+            <span style="color: #FF9900">
+              <% (5 - index).times do %>
+                ★
+              <% end -%>
+            </span>
+          <% end -%>
+        </td>
+        <td style="vertical-align: middle;" class="text-center">
+          <%= target.tasks_count %>
+        </td>
+      </tr>
+    <% end -%>
+  </table>
 <% else %>
   <h3>想达成的目标是？</h3>
 <% end %>

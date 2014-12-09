@@ -13,6 +13,7 @@
 <% end %>
 
 <p>  </p>
+<%= link_to '删除这个任务', @task, method: :delete, data: { confirm: '你确定?' }, class: 'btn btn-danger btn-block' %>
 <%= link_to '返回', tasks_path, class: 'btn btn-default btn-block' %>
 
 <script type="text/javascript">

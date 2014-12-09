@@ -9,10 +9,6 @@ class TasksController < ApplicationController
     respond_with(@tasks)
   end
 
-  #def show
-    #respond_with(@task)
-  #end
-
   def new
     @task = Task.new
     respond_with(@task)
@@ -23,8 +19,11 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
-    @task.save
-    respond_with(@task)
+    if @task.save
+      redirect_to tasks_path
+    else
+      render :new
+    end
   end
 
   def update

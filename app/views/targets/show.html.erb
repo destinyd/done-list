@@ -1,12 +1,14 @@
 <h1><%= @target.description %></h1>
 
-<div class="row show-grid">
+<table class="table table-bordered">
   <% @target.tasks.each do |task| %>
-    <div class="col-xs-12">
-      <%= task.description %>
-    </div>
+    <tr>
+      <td>
+        <%= task.description %>
+      </td>
+    </tr>
   <% end -%>
-</div>
+</table>
 
 <p>  </p>
 
