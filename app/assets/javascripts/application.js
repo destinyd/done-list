@@ -16,4 +16,5 @@
 //= require moment
 //= require moment.zh-cn
 //= require bootstrap-datetimepicker
+//= require chart.min
 //= require_tree .
