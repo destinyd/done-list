@@ -1,0 +1,29 @@
+<table class="table table-bordered">
+  <tr>
+    <td>
+      完成任务总数
+      <h3><%= @tasks_count %></h3>
+    </td>
+    <td>
+      最近30天完成数
+      <h3><%= @recent_tasks_count %></h3>
+    </td>
+    <td>
+      最长连续天数
+      <h3><%#= @recent_tasks_count %></h3>
+    </td>
+  </tr>
+</table>
+
+<table class="table table-bordered">
+  <tr>
+    <% 0.upto(4).each do |i| %>
+      <td>
+        <%= 5 - i %>星目标
+        <h3>
+          <%= @targets[i].blank? ? '无' : @targets[i].tasks_count %>
+        </h3>
+      </td>
+    <% end -%>
+  </tr>
+</table>
