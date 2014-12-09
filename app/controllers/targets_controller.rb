@@ -5,7 +5,7 @@ class TargetsController < ApplicationController
   respond_to :html
 
   def index
-    @targets = Target.recent
+    @targets = Target.important
     respond_with(@targets)
   end
 

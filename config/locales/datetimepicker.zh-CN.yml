@@ -1,6 +1,6 @@
 zh-CN:
   datepicker:
-    dformat: '%Y-%d-%m'        # display format of the date (this is the default, can be ommited)
+    dformat: '%Y-%m-%d'        # display format of the date (this is the default, can be ommited)
     pformat: 'YYYY-MM-DD'      # picking format of the date (this is the default, can be ommited)
     weekstart: 1               # the week starts on Sunday (this is the default, can be ommited)
   timepicker:

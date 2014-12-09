@@ -3,7 +3,7 @@
 <% if @tasks.any? %>
   <table class="table table-bordered">
     <tbody>
-      <% @tasks.group_by{|t| t.created_at.strftime("%Y-%m-%d")}.each do |date, tasks| %>
+      <% @tasks.group_by{|t| t.finished_at.strftime("%Y-%m-%d")}.each do |date, tasks| %>
         <% first_task = tasks.first %>
         <tr>
           <td rowspan="<%= tasks.count %>" class="text-center" style="vertical-align: middle;">
@@ -16,13 +16,13 @@
             <% end -%>
             <p class="text-primary"> <%= first_task.finished_at.strftime("%m-%d") %> </p>
           </td>
-          <td>
+          <td style="vertical-align: middle;">
             <%= link_to first_task.description, edit_task_path(first_task) %>
           </td>
         </tr>
         <% tasks[1..-1].each do |task| %>
           <tr>
-            <td>
+            <td style="vertical-align: middle;">
               <%= link_to task.description, edit_task_path(task) %>
             </td>
           </tr>
@@ -31,7 +31,7 @@
     </tbody>
   </table>
 <% else %>
-  <h3>想达成的目标是？</h3>
+  <h3>今天搞定了哪些任务？</h3>
 <% end %>
 <p>  </p>
 <%= link_to '+ 点击添加', new_task_path, class: 'btn btn-primary btn-block' %>
