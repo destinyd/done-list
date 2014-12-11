@@ -97,5 +97,6 @@ class User
     target = self.targets.create description: '提升 GTD 水平'
     task = self.tasks.create description: '开始使用 Done List', finished_at: Time.now
     target.tasks << task
+    target = self.targets.create description: '随手记录一些已完成任务'
   end
 end
