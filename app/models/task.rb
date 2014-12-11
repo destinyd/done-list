@@ -15,6 +15,15 @@ class Task
     description
   end
 
+
+  after_create :add_default_target, unless: :targets?
+  after_update :add_default_target, unless: :targets?
+  def add_default_target
+    if @default_target = self.user.targets.where(is_default: true).first
+      self.targets << @default_target
+    end
+  end
+
   after_create :refresh_targets_tasks_count
   after_update :refresh_targets_tasks_count
   def refresh_targets_tasks_count
