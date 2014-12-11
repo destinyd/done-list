@@ -6,6 +6,15 @@ GIT
       railties (>= 3.1)
 
 GIT
+  remote: git://github.com/fushang318/mina.git
+  revision: 93f5ca5d1c9588a59859704302543710af7b37d0
+  tag: v0.2.0fix
+  specs:
+    mina (0.2.0)
+      open4
+      rake
+
+GIT
   remote: git://github.com/zpaulovics/datetimepicker-rails.git
   revision: d0f8a68f30d7ffb34e505845a693df27467424f3
   branch: master
@@ -96,6 +105,7 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.1)
     jwt (1.2.0)
+    kgio (2.9.2)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
@@ -130,6 +140,7 @@ GEM
     omniauth-weibo-oauth2 (0.3.2)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.0)
+    open4 (1.3.4)
     optionable (0.2.0)
     origin (2.1.1)
     orm_adapter (0.5.0)
@@ -162,6 +173,7 @@ GEM
       activesupport (= 4.1.8)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
+    raindrops (0.13.0)
     rake (10.4.2)
     rdoc (4.1.2)
       json (~> 1.4)
@@ -202,6 +214,10 @@ GEM
     uglifier (2.5.3)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unicorn (4.8.3)
+      kgio (~> 2.6)
+      rack
+      raindrops (~> 0.7)
     warden (1.2.3)
       rack (>= 1.0)
     weibo_2 (0.1.6)
@@ -225,6 +241,7 @@ DEPENDENCIES
   figaro (>= 1.0.0)
   jbuilder (~> 2.0)
   jquery-rails
+  mina!
   momentjs-rails (>= 2.8.1)!
   mongoid (= 4.0.0)
   omniauth
@@ -239,4 +256,5 @@ DEPENDENCIES
   spring
   turbolinks
   uglifier (>= 1.3.0)
+  unicorn
   weibo_2
