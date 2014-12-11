@@ -8,6 +8,7 @@ class HomeController < ApplicationController
   end
 
   def dashboard
+    current_user.learn '发现完成状况统计图'
     @tasks_count = current_user.tasks.count
     @recent_tasks = current_user.tasks.month
     @recent_tasks_count = @recent_tasks.count

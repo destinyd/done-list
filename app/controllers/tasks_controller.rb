@@ -20,6 +20,7 @@ class TasksController < ApplicationController
   def create
     @task = current_user.tasks.new(task_params)
     if @task.save
+      current_user.learn '学会了创建<已完成任务>'
       redirect_to dashboard_path
     else
       render :new
@@ -27,6 +28,7 @@ class TasksController < ApplicationController
   end
 
   def update
+    current_user.learn '学会了把<已完成任务>关联到<目标>' if task_params['target_ids'] and (@task.target_ids.length != task_params['target_ids'].select{|v| !v.blank?}.length)
     if @task.update(task_params)
       redirect_to tasks_path
     else

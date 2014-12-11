@@ -5,6 +5,7 @@ class TargetsController < ApplicationController
   respond_to :html
 
   def index
+    current_user.learn '发现目标列表'
     @targets = current_user.targets.important
     respond_with(@targets)
   end
@@ -23,11 +24,16 @@ class TargetsController < ApplicationController
 
   def create
     @target = current_user.targets.new(target_params)
-    @target.save
-    respond_with(@target)
+    if @target.save
+      current_user.learn '学会了创建<目标>'
+      respond_with(@target)
+    else
+      render :new
+    end
   end
 
   def update
+    current_user.learn '学会了把<已完成任务>关联到<目标>' if target_params['task_ids'] and (@target.task_ids.length != target_params['task_ids'].select{|v| !v.blank?}.length)
     @target.update(target_params)
     respond_with(@target)
   end

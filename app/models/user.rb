@@ -42,6 +42,7 @@ class User
 
   has_many :tasks
   has_many :targets
+  embeds_many :learns
 
 
   # https://github.com/mongoid/mongoid/issues/3626#issuecomment-64700154
@@ -92,11 +93,27 @@ class User
     false
   end
 
+  def is_learn? key
+    self.learns.where(key: key).first
+  end
+
+  def get_gtd
+    @gtd ||= self.targets.where(description: '提升 GTD 水平').first
+  end
+
+  def learn description
+    unless is_learn? description
+      self.learns.create key: description
+      task = self.tasks.create description: description, targets: [get_gtd]
+    end
+  end
+
   after_create :add_default_data
   def add_default_data
     target = self.targets.create description: '提升 GTD 水平'
     task = self.tasks.create description: '开始使用 Done List', finished_at: Time.now
     target.tasks << task
     target = self.targets.create description: '随手记录一些已完成任务', is_default: true
+    self.learn '发现任务列表'
   end
 end

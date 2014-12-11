@@ -2,7 +2,7 @@ class Task
   include Mongoid::Document
   include Mongoid::Timestamps
   field :description, type: String
-  field :finished_at, type: Time
+  field :finished_at, type: Time, default: -> {Time.now}
   belongs_to :user
   has_and_belongs_to_many :targets
 
@@ -15,7 +15,6 @@ class Task
   def to_s
     description
   end
-
 
   after_create :add_default_target, unless: :targets?
   after_update :add_default_target, unless: :targets?
