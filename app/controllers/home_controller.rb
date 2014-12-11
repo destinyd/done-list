@@ -9,7 +9,7 @@ class HomeController < ApplicationController
 
   def dashboard
     @tasks_count = current_user.tasks.count
-    @recent_tasks = current_user.tasks.where(:finished_at.gt => 30.days.ago)
+    @recent_tasks = current_user.tasks.month
     @recent_tasks_count = @recent_tasks.count
     @targets = Target.important.limit(5)
     @date_tasks_hash = @recent_tasks.group_by{|t| t.finished_at.strftime("%Y-%m-%d")}

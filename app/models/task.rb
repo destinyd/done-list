@@ -9,7 +9,8 @@ class Task
   validates_presence_of :description
   validates_presence_of :finished_at
 
-  scope :recent, -> {order("id desc")}
+  scope :recent, -> {desc(:finished_at)}
+  scope :month, -> {where(:finished_at.gt => 30.days.ago).asc(:finished_at)}
 
   def to_s
     description
