@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -88,5 +90,12 @@ class User
 
   def email_required?
     false
+  end
+
+  after_create :add_default_data
+  def add_default_data
+    target = self.targets.create description: '提升 GTD 水平'
+    task = self.tasks.create description: '开始使用 Done List', finished_at: Time.now
+    target.tasks << task
   end
 end
