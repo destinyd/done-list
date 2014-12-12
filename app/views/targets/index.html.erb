@@ -5,7 +5,7 @@
     <% @targets.each_with_index do |target, index| %>
       <tr>
         <td style="vertical-align: middle;">
-          <%= link_to target.description, target %> <br />
+          <%= link_to target.description, edit_target_path(target) %> <br />
           <% if 5- index > 0 %>
             <span style="color: #FF9900">
               <% (5 - index).times do %>
