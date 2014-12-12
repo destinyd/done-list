@@ -1,7 +1,7 @@
 <%= simple_form_for(@target) do |f| %>
   <div class="form-inputs">
     <%= f.input :description, placeholder: '目标描述...', label: '描述' %>
-    <%= f.association :tasks, label: '关联任务...', include_blank: false %>
+    <%= f.association :tasks, label: '以下任务对当前目标有贡献...', include_blank: false %>
   </div>
 
   <div class="form-actions">
