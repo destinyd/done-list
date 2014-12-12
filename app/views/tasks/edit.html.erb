@@ -4,7 +4,7 @@
   <div class="form-inputs">
     <%= f.input :description, label: '任务描述...' %>
     <%= f.input :finished_at, as: :date_picker, label: '任务完成日期', placeholder: '点击选择任务完成日期...' %>
-    <%= f.association :targets, label: '关联目标...', include_blank: false %>
+    <%= f.association :targets, as: :check_boxes, label: '关联目标...', include_blank: false %>
   </div>
 
   <div class="form-actions">
