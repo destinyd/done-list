@@ -9,8 +9,11 @@ class Target
 
   validates_presence_of :description
 
-  scope :recent, -> {order("id desc")}
-  scope :important, -> {order("tasks_count desc")}
+  scope :recent, -> {desc(:id)}
+  scope :important, -> {desc(:tasks_count)}
+
+  index({ tasks_count: -1 }, { background: true })
+  index({ user_id: 1 }, { background: true })
 
   def to_s
     description

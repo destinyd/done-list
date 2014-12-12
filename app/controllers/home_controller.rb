@@ -12,7 +12,7 @@ class HomeController < ApplicationController
     @tasks_count = current_user.tasks.count
     @recent_tasks = current_user.tasks.month
     @recent_tasks_count = @recent_tasks.count
-    @targets = Target.important.limit(5)
+    @targets = current_user.targets.important.limit(5).to_a
     @date_tasks_hash = @recent_tasks.group_by{|t| t.finished_at.strftime("%Y-%m-%d")}
     @color_num = 3312336
   end
