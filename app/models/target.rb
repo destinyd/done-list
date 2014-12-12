@@ -4,6 +4,7 @@ class Target
   field :description, type: String
   field :tasks_count, type: Integer, default: 0
   field :is_default, type: Boolean, default: false
+  field :is_system, type: Boolean, default: false
   belongs_to :user
   has_and_belongs_to_many :tasks
 
@@ -12,8 +13,10 @@ class Target
   scope :recent, -> {desc(:id)}
   scope :important, -> {desc(:tasks_count)}
 
-  index({ tasks_count: -1 }, { background: true })
+  index({ tasks_count: 1 }, { background: true })
   index({ user_id: 1 }, { background: true })
+  index({ is_default: 1 }, { background: true })
+  index({ is_system: 1 }, { background: true })
 
   def to_s
     description

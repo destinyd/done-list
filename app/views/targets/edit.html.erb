@@ -2,7 +2,7 @@
 
 <%= simple_form_for(@target) do |f| %>
   <div class="form-inputs">
-    <%= f.input :description, placeholder: '目标描述...', label: '描述', input_html: {disabled: @target.is_default} %>
+    <%= f.input :description, placeholder: '目标描述...', label: '描述', input_html: {disabled: @target.is_system} %>
     <%= f.association :tasks, as: :check_boxes, label: '以下任务对当前目标有贡献...', include_blank: false %>
   </div>
 
@@ -12,5 +12,5 @@
 <% end %>
 <p>  </p>
 
-<%= link_to '删除这个目标', @target, method: :delete, data: { confirm: '你确定?' }, class: 'btn btn-danger btn-block', disabled: @target.is_default %>
+<%= link_to '删除这个目标', @target, method: :delete, data: { confirm: '你确定?' }, class: 'btn btn-danger btn-block', disabled: @target.is_system %>
 <%= link_to '返回', targets_path, class: 'btn btn-default btn-block' %>

@@ -110,10 +110,10 @@ class User
 
   after_create :add_default_data
   def add_default_data
-    target = self.targets.create description: '提升 GTD 水平'
+    target = self.targets.create description: '提升 GTD 水平', is_system: true
     task = self.tasks.create description: '开始使用 Done List', finished_at: Time.now
     target.tasks << task
-    target = self.targets.create description: '随手记录一些已完成任务', is_default: true
+    target = self.targets.create description: '随手记录一些已完成任务', is_default: true, is_system: true
     self.learn '发现任务列表'
   end
 end
