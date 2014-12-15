@@ -20,10 +20,6 @@
   </tr>
 </table>
 
-<div class="text-center">
-  <canvas id="taskChart" height="200"></canvas>
-</div>
-
 <div id="tasks_chart" style="height: 200px;" class="col-xs-12"></div>
 
 <table class="table table-bordered">
@@ -39,49 +35,9 @@
   </tr>
 </table>
 
-<div class="row">
-  <div class="text-center col-xs-8">
-    <canvas id="targetChart" height="200"></canvas>
-  </div>
-  <div class="col-xs-4">
-    <% 1.upto(5).each do |index| %>
-      <p style="color: #<%= (@color_num * index).to_s(16) %>">
-        <%= "★" * index%>
-      </p>
-    <% end -%>
-  </div>
-</div>
-
 <div id="targets_chart" style="height: 200px;" class="col-xs-12"></div>
 
 <script type="text/javascript">
-  var ctx = $("#taskChart").get(0).getContext("2d");
-  var data = {
-    labels : <%= raw @date_tasks_hash.keys.to_json %>,
-          datasets : [
-            {
-              fillColor : "rgba(151,187,205,0.5)",
-                          strokeColor : "rgba(151,187,205,1)",
-                          data : <%= @date_tasks_hash.values.map(&:count) %>
-          }
-          ]
-  }
-  var options = {};
-  new Chart(ctx).Bar(data,options);
-
-  var ctx1 = $("#targetChart").get(0).getContext("2d");
-  var data1 = [
-    <% @targets.map(&:tasks_count).each_with_index do |tasks_count, index| %>
- {
-   value: <%= tasks_count %>,
-   color: '#<%= (@color_num * (5 - index)).to_s(16) %>'
- },
-    <% end -%>
-  ]
-  var options1 = {};
-  new Chart(ctx1).Pie(data1,options1);
-  <%#var myNewChart = new Chart(ctx);%>
-
 // note, each data item has "bullet" field.
 var columnChartData = [
   <% @date_tasks_hash.each do |key, val| %>
