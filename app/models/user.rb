@@ -105,6 +105,8 @@ class User
     unless is_learn? description
       self.learns.create key: description
       task = self.tasks.create description: description, targets: [get_gtd]
+      task.targets << get_gtd
+      task.save
     end
   end
 
