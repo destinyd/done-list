@@ -3,7 +3,7 @@
 <%= simple_form_for(@target) do |f| %>
   <div class="form-inputs">
     <%= f.input :description, placeholder: '目标描述...', label: '描述', input_html: {disabled: @target.is_system} %>
-    <%= f.association :tasks, as: :check_boxes, label: '以下任务对当前目标有贡献...', include_blank: false %>
+    <%= f.association :tasks, as: :check_boxes, collection: current_user.tasks.recent, label: '以下任务对当前目标有贡献...', include_blank: false %>
   </div>
 
   <div class="form-actions">
