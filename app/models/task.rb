@@ -10,7 +10,7 @@ class Task
   validates_presence_of :finished_at
 
   scope :recent, -> {desc(:finished_at)}
-  scope :month, -> {where(:finished_at.gt => 30.days.ago).asc(:finished_at)}
+  scope :five_day, -> {where(:finished_at.gt => 5.days.ago).asc(:finished_at)}
 
   def to_s
     description
