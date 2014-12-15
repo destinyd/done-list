@@ -24,6 +24,8 @@
   <canvas id="taskChart" height="200"></canvas>
 </div>
 
+<div id="tasks_chart" style="height: 200px;" class="col-xs-12"></div>
+
 <table class="table table-bordered">
   <tr>
     <% 0.upto(4).each do |i| %>
@@ -42,24 +44,26 @@
     <canvas id="targetChart" height="200"></canvas>
   </div>
   <div class="col-xs-4">
-      <% 1.upto(5).each do |index| %>
-        <p style="color: #<%= (@color_num * index).to_s(16) %>">
-          <%= "★" * index%>
-        </p>
-      <% end -%>
+    <% 1.upto(5).each do |index| %>
+      <p style="color: #<%= (@color_num * index).to_s(16) %>">
+        <%= "★" * index%>
+      </p>
+    <% end -%>
   </div>
 </div>
+
+<div id="targets_chart" style="height: 200px;" class="col-xs-12"></div>
 
 <script type="text/javascript">
   var ctx = $("#taskChart").get(0).getContext("2d");
   var data = {
     labels : <%= raw @date_tasks_hash.keys.to_json %>,
           datasets : [
-                  {
-                          fillColor : "rgba(151,187,205,0.5)",
+            {
+              fillColor : "rgba(151,187,205,0.5)",
                           strokeColor : "rgba(151,187,205,1)",
                           data : <%= @date_tasks_hash.values.map(&:count) %>
-                  }
+          }
           ]
   }
   var options = {};
@@ -77,4 +81,82 @@
   var options1 = {};
   new Chart(ctx1).Pie(data1,options1);
   <%#var myNewChart = new Chart(ctx);%>
+
+// note, each data item has "bullet" field.
+var columnChartData = [
+  <% @date_tasks_hash.each do |key, val| %>
+ {
+   'date': '<%= key %>',
+   'total': '<%= val.count %>',
+   'names': '<%= raw val.map(&:description).join('<br />') %>'
+ },
+ <% end -%>
+];
+
+
+AmCharts.ready(function () {
+    // SERIAL CHART
+    var chart = new AmCharts.AmSerialChart();
+    chart.dataProvider = columnChartData;
+    chart.categoryField = "date";
+
+    // AXES
+    // category
+    var categoryAxis = chart.categoryAxis;
+    categoryAxis.inside = true;
+    categoryAxis.axisAlpha = 0;
+    categoryAxis.gridAlpha = 0;
+    categoryAxis.tickLength = 0;
+
+    // value
+    var valueAxis = new AmCharts.ValueAxis();
+    valueAxis.minimum = 0;
+    valueAxis.dashLength = 4;
+    chart.addValueAxis(valueAxis);
+
+    // GRAPH
+    var graph = new AmCharts.AmGraph();
+    graph.valueField = "total";
+    graph.type = "column";
+    graph.fillAlphas = 0.6;
+    graph.lineAlpha = 0;
+    graph.balloonText = "<span style='font-size:13px;'>[[names]]<br /><b>共 [[value]] 项</b></span>";
+    chart.addGraph(graph);
+
+    // WRITE
+    chart.write("tasks_chart");
+});
+
+  var chart_pie;
+  var legend_pie;
+
+  var chartData_pie = [
+    <% @targets.map(&:tasks_count).each_with_index do |tasks_count, index| %>
+    {
+      "name": "<%= "★" * (5 -index) %>",
+      "total": <%= tasks_count %>
+    },
+    <% end -%>
+  ];
+
+  AmCharts.ready(function () {
+      // PIE CHART
+      chart = new AmCharts.AmPieChart();
+      chart.dataProvider = chartData_pie;
+      chart.titleField = "name";
+      chart.valueField = "total";
+      <%#chart.labelRadius = -30;%>
+      chart.labelText = "";
+
+      // LEGEND
+      legend = new AmCharts.AmLegend();
+      legend.position = "right";
+      legend.align = "center";
+      legend.markerType = "circle";
+      chart.balloonText = "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>";
+      chart.addLegend(legend);
+
+      // WRITE
+      chart.write("targets_chart");
+  });
 </script>
