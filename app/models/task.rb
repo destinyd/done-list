@@ -5,6 +5,7 @@ class Task
   field :finished_at, type: Time, default: -> {Time.now}
   belongs_to :user
   has_and_belongs_to_many :targets
+  attr_accessor :has_not_targets
 
   validates_presence_of :description
   validates_presence_of :finished_at
@@ -21,6 +22,7 @@ class Task
   def add_default_target
     if @default_target = self.user.targets.where(is_default: true).first
       self.targets << @default_target
+      self.has_not_targets = true
     end
   end
 
