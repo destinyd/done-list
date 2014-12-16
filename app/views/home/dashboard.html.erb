@@ -40,11 +40,13 @@
 <script type="text/javascript">
 // note, each data item has "bullet" field.
 var columnChartData = [
-  <% @date_tasks_hash.each do |key, val| %>
+  <% (0..4).each do |i| %>
+    <% date =  (4 - i).days.ago.strftime("%Y-%m-%d") %>
+    <% tasks = @date_tasks_hash[date] %>
  {
-   'date': '<%= key %>',
-   'total': '<%= val.count %>',
-   'names': '<%= raw '<li class="chart-text">' + val.map(&:description).reverse[0..8].join('</li><li class="chart-text">') + '</li>' + (val.count > 9 ? '<li class="chart-text">……</li>': '') %>'
+   'date': '<%= date %>',
+   'total': '<%= tasks ? tasks.count : 0 %>',
+   'names': '<%= tasks ? raw('<li class="chart-text">' + tasks.map(&:description).reverse[0..8].join('</li><li class="chart-text">') + '</li>' + (tasks.count > 9 ? '<li class="chart-text">……</li>': '')) : '' %>'
  },
  <% end -%>
 ];
