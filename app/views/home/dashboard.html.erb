@@ -50,7 +50,19 @@ var columnChartData = [
 ];
 
 
-AmCharts.ready(function () {
+  var chart_pie;
+  var legend_pie;
+
+  var chartData_pie = [
+    <% @targets.map(&:tasks_count).each_with_index do |tasks_count, index| %>
+ {
+   "name": "<%= "★" * (5 -index) %>",
+      "total": <%= tasks_count %>
+    },
+    <% end -%>
+  ];
+
+$(document).on("page:change", function () {
   // SERIAL CHART
     var chart = new AmCharts.AmSerialChart();
     chart.dataProvider = columnChartData;
@@ -83,19 +95,8 @@ AmCharts.ready(function () {
     chart.write("tasks_chart");
 });
 
-  var chart_pie;
-  var legend_pie;
 
-  var chartData_pie = [
-    <% @targets.map(&:tasks_count).each_with_index do |tasks_count, index| %>
- {
-   "name": "<%= "★" * (5 -index) %>",
-      "total": <%= tasks_count %>
-    },
-    <% end -%>
-  ];
-
-  AmCharts.ready(function () {
+$(document).on("page:change", function () {
     // PIE CHART
       chart = new AmCharts.AmPieChart();
       chart.dataProvider = chartData_pie;
