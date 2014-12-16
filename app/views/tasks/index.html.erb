@@ -7,7 +7,7 @@
         <% first_task = tasks.first %>
         <tr>
           <td rowspan="<%= tasks.count %>" class="text-center" style="vertical-align: middle;">
-            <p> 周<%= first_task.finished_at.try(:wday) %> </p>
+            <p> <%= t('date.day_names')[first_task.finished_at.wday] if first_task.finished_at.try(:wday) %> </p>
             <p> <%= first_task.finished_at.try(:year) %> </p>
             <% if date == Time.now.strftime("%Y-%m-%d") %>
               <h3 class="text-primary"> 今天 </h3>
