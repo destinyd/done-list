@@ -57,10 +57,10 @@ var columnChartData = [
   var legend_pie;
 
   var chartData_pie = [
-    <% @star_targets_hash.each do |key, tasks| %>
+    <% @star_targets_hash.each do |key, targets| %>
  {
    "name": "<%= "★" * (key + 1) %>",
-      "total": <%= tasks.sum(&:tasks_count) %>
+      "total": <%= targets.count %>
     },
     <% end -%>
   ];
