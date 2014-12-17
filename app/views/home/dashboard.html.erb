@@ -25,10 +25,11 @@
 <table class="table table-bordered">
   <tr>
     <% 0.upto(4).each do |i| %>
+      <% index = 4 - i %>
       <td>
         <%= 5 - i %>星目标
         <h3>
-          <%= @targets[i].blank? ? '无' : @targets[i].tasks_count %>
+          <%= @star_targets_hash[index].blank? ? '无' : @star_targets_hash[index].sum(&:tasks_count) %>
         </h3>
       </td>
     <% end -%>
@@ -56,10 +57,10 @@ var columnChartData = [
   var legend_pie;
 
   var chartData_pie = [
-    <% @targets.map(&:tasks_count).each_with_index do |tasks_count, index| %>
+    <% @star_targets_hash.each do |key, tasks| %>
  {
-   "name": "<%= "★" * (5 -index) %>",
-      "total": <%= tasks_count %>
+   "name": "<%= "★" * (key + 1) %>",
+      "total": <%= tasks.sum(&:tasks_count) %>
     },
     <% end -%>
   ];
