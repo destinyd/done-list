@@ -29,7 +29,7 @@
       <td>
         <%= 5 - i %>星目标
         <h3>
-          <%= @star_targets_hash[index].blank? ? '无' : @star_targets_hash[index].sum(&:tasks_count) %>
+          <%= @star_targets_hash[index].blank? ? '无' : @star_targets_hash[index].count %>
         </h3>
       </td>
     <% end -%>
