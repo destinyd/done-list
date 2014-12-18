@@ -47,10 +47,10 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]
   gem 'quiet_assets'
-  gem 'byebug'
 end
 
 group :development, :test do
+  gem 'byebug'
   gem 'pry-rails'
   gem 'pry-rescue'
 end

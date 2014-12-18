@@ -93,6 +93,24 @@ class User
     false
   end
 
+  def star_targets_hash
+    max_count = self.targets.important.first.try(:tasks_count) || 0
+    min_count = self.targets.important.last.try(:tasks_count) || 0
+    if min_count == max_count
+      if min_count > 0
+        @star_targets_hash = {4 => self.targets.important.to_a}
+      else
+        @star_targets_hash = {}
+      end
+    else
+      delta = (max_count - min_count) / 5.0
+      @star_targets_hash = self.targets.important.group_by do |target|
+        v = ((target.tasks_count - min_count) / delta).floor
+        v > 4 ? 4 : v
+      end
+    end
+  end
+
   def is_learn? key
     self.learns.where(key: key).first
   end
