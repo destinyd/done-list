@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'landing/first_login', as: :first_login
+
   resources :tasks
 
   resources :targets

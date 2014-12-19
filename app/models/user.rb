@@ -119,9 +119,17 @@ class User
     @gtd ||= self.targets.where(description: '提升 GTD 水平').first
   end
 
+  def is_mark? description
+    self.learns.where(key: description).first
+  end
+
+  def mark description
+    self.learns.where(key: description).first_or_create
+  end
+
   def learn description
     unless is_learn? description
-      self.learns.create key: description
+      mark description
       task = self.tasks.create description: description, targets: [get_gtd]
       task.targets << get_gtd
       task.save
