@@ -1,7 +1,11 @@
-<h2>登录</h2>
-
-<%- if devise_mapping.omniauthable? %>
+<div class="sign-in">
+  <%= image_tag "http://img.teamkn.com/i/NXbOZbCy.png@300w.png" %>
+  <p class="lead">
+    Done List 是一个简单的小工具，它能帮你记录日常工作成果，并且可视化地呈现你近期的 GTD 水平。
+  </p>
   <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= link_to "通过新浪微博登录", omniauth_authorize_path(resource_name, provider), class: 'btn btn-primary' %><br />
+    <div class="">
+      <%= link_to "新浪微博登录", omniauth_authorize_path(resource_name, provider), class: 'btn-lg btn-primary' %><br />
+    </div>
   <% end -%>
-<% end -%>
+</div>
