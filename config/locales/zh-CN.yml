@@ -222,3 +222,14 @@ zh-CN:
     previous_label: "&#8592; 上一页"
     next_label: "下一页 &#8594;"
     page_gap: "&hellip;"
+
+  notice:
+    system_status_001: '程序自动添加一个目标和一个已完成任务。【目标 = “提升 GTD 水平”，已完成任务 = “开始使用 Done List”】'
+    system_status_002: '预置一个目标叫做【随手记录一些已完成任务】'
+    system_status_003: '创建一个新的【已完成任务】“发现任务列表”'
+    system_status_004: '创建一个新的【已完成任务】“发现目标列表” '
+    system_status_005: '创建一个新的【已完成任务】“发现完成状况统计图” '
+    system_status_006: '创建一个新的【已完成任务】“学会了创建<已完成任务>”'
+    system_status_007: '创建一个新的【已完成任务】“学会了把<已完成任务>关联到<目标>”'
+    system_status_008: '没有为任务指定目标，自动归为【随手记录一些已完成任务】'
+    system_status_009: '创建一个新的【已完成任务】“学会了创建<目标>”'

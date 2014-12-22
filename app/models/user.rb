@@ -40,6 +40,8 @@ class User
   field :uid,    type: String
   field :nickname,    type: String
 
+  field :system_status, type: Array, default: []
+
   has_many :tasks
   has_many :targets
   embeds_many :learns
@@ -136,6 +138,16 @@ class User
     end
   end
 
+  def push_status param
+    if param.is_a?(String)
+      self.system_status << param
+      self.save
+    elsif param.is_a?(Array)
+      self.system_status + param
+      self.save
+    end
+  end
+
   after_create :add_default_data
   def add_default_data
     target = self.targets.create description: '提升 GTD 水平', is_system: true
@@ -143,5 +155,9 @@ class User
     target.tasks << task
     target = self.targets.create description: '随手记录一些已完成任务', is_default: true, is_system: true
     self.learn '发现任务列表'
+    self.system_status << '001'
+    self.system_status << '002'
+    self.system_status << '003'
+    self.save
   end
 end

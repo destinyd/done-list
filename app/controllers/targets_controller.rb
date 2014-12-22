@@ -5,7 +5,7 @@ class TargetsController < ApplicationController
   respond_to :html
 
   def index
-    current_user.learn '发现目标列表'
+    flash[:notice] = t('notice.system_status_004') if current_user.learn '发现目标列表'
     @targets = current_user.targets.important
     respond_with(@targets)
   end
@@ -25,7 +25,7 @@ class TargetsController < ApplicationController
   def create
     @target = current_user.targets.new(target_params)
     if @target.save
-      current_user.learn '学会了创建<目标>'
+      flash[:notice] = t('notice.system_status_009') if current_user.learn '学会了创建<目标>'
       respond_with(@target)
     else
       render :new
@@ -33,7 +33,9 @@ class TargetsController < ApplicationController
   end
 
   def update
-    current_user.learn '学会了把<已完成任务>关联到<目标>' if target_params['task_ids'] and (@target.task_ids.length != target_params['task_ids'].select{|v| !v.blank?}.length)
+    if target_params['task_ids'] and (@target.task_ids.length != target_params['task_ids'].select{|v| !v.blank?}.length)
+      flash[:notice] = t('notice.system_status_007') if current_user.learn '学会了把<已完成任务>关联到<目标>' 
+    end
     @target.update(target_params)
     respond_with(@target)
   end
@@ -44,11 +46,11 @@ class TargetsController < ApplicationController
   end
 
   private
-    def set_target
-      @target = current_user.targets.find(params[:id])
-    end
+  def set_target
+    @target = current_user.targets.find(params[:id])
+  end
 
-    def target_params
-      params.require(:target).permit(:description, task_ids: [])
-    end
+  def target_params
+    params.require(:target).permit(:description, task_ids: [])
+  end
 end
