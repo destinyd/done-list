@@ -1,41 +1,35 @@
-<h1>已经搞定的任务</h1>
+<div class="form-group string">
+  <input class="string form-control" placeholder="记录今天搞定的任务..." type="text" id="go_to_new_task">
+</div>
 
 <% if @tasks.any? %>
-  <table class="table table-bordered">
-    <tbody>
-      <% @tasks.group_by{|t| t.finished_at.strftime("%Y-%m-%d")}.each do |date, tasks| %>
-        <% first_task = tasks.first %>
-        <tr>
-          <td rowspan="<%= tasks.count %>" class="text-center" style="vertical-align: middle;">
-            <p> <%= t('date.day_names')[first_task.finished_at.wday] if first_task.finished_at.try(:wday) %> </p>
-            <p> <%= first_task.finished_at.try(:year) %> </p>
-            <% if date == Time.now.strftime("%Y-%m-%d") %>
-              <h3 class="text-primary"> 今天 </h3>
-            <% elsif date == 1.day.ago.strftime("%Y-%m-%d") %>
-              <h3 class="text-primary"> 昨天 </h3>
-            <% end -%>
-            <p class="text-primary"> <%= first_task.finished_at.strftime("%m-%d") %> </p>
-          </td>
-          <td style="vertical-align: middle;">
-            <%= link_to first_task.description, edit_task_path(first_task) %>
-          </td>
-        </tr>
-        <% tasks[1..-1].each do |task| %>
-          <tr>
-            <td style="vertical-align: middle;">
-              <%= link_to task.description, edit_task_path(task) %>
-            </td>
-          </tr>
-        <% end -%>
+  <% @tasks.group_by{|t| t.finished_at.strftime("%Y-%m-%d")}.each do |date, tasks| %>
+    <div>
+      <% if date == Time.now.strftime("%Y-%m-%d") %>
+        <h4> 今天 </h3>
+      <% elsif date == 1.day.ago.strftime("%Y-%m-%d") %>
+        <h4> 昨天 </h3>
+      <% else %>
+        <h4> <%= date %> </h3>
       <% end -%>
-    </tbody>
-  </table>
+      <ul>
+        <% tasks.each do |task| %>
+          <li>
+            <%= link_to task.description, edit_task_path(task) %>
+          </li>
+        <% end -%>
+      </ul>
+    <% end -%>
+  </div>
 <% else %>
   <div class="text-center">
     <h3>今天搞定了哪些任务？</h3>
     <%= image_tag "write.png" %>
   </div>
 <% end %>
-<p>  </p>
-<%= link_to '+ 点击添加', new_task_path, class: 'btn btn-primary btn-block' %>
 
+<script type="text/javascript">
+  $('#go_to_new_task').on('focus', function(){
+    go_to("/tasks/new");
+  })
+</script>

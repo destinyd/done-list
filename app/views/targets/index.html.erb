@@ -1,4 +1,6 @@
-<h1>希望推进的目标</h1>
+<div class="form-group string">
+  <input class="string form-control" placeholder="新增目标..." type="text" id="go_to_new_target">
+</div>
 
 <% if @targets.any? %>
   <table class="table table-bordered">
@@ -26,5 +28,9 @@
     <%= image_tag "write.png" %>
   </div>
 <% end %>
-<p>  </p>
-<%= link_to '+ 点击添加', new_target_path, class: 'btn btn-primary btn-block' %>
+
+<script type="text/javascript">
+  $('#go_to_new_target').on('focus', function(){
+    go_to("/targets/new");
+  })
+</script>
