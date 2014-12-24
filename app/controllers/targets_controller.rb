@@ -15,7 +15,11 @@ class TargetsController < ApplicationController
   end
 
   def new
-    @target = current_user.targets.new
+    if params[:target]
+      @target = current_user.targets.new target_params
+    else
+      @target = current_user.targets.new
+    end
     respond_with(@target)
   end
 

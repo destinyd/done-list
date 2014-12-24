@@ -1,6 +1,17 @@
-<div class="form-group string">
-  <input class="string form-control" placeholder="新增目标..." type="text" id="go_to_new_target">
-</div>
+<form action="/targets/new" method="get" id="new_target">
+  <div class="row">
+    <div class="col-xs-9">
+      <div class="form-group string">
+        <input class="string form-control" placeholder="新增目标..." type="text" id="go_to_new_target" name="target[description]">
+      </div>
+    </div>
+    <div class="col-xs-3">
+      <button class="btn btn-primary">
+        希望实现这个目标
+      </button>
+    </div>
+  </div>
+</form>
 
 <% if @targets.any? %>
   <table class="table table-bordered">
@@ -28,9 +39,3 @@
     <%= image_tag "write.png" %>
   </div>
 <% end %>
-
-<script type="text/javascript">
-  $('#go_to_new_target').on('focus', function(){
-    go_to("/targets/new");
-  })
-</script>
