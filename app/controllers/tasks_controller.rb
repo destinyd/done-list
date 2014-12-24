@@ -10,7 +10,11 @@ class TasksController < ApplicationController
   end
 
   def new
-    @task = current_user.tasks.new task_params
+    if params[:task]
+      @task = current_user.tasks.new task_params
+    else
+      @task = current_user.tasks.new
+    end
     respond_with(@task)
   end
 
