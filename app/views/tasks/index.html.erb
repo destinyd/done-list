@@ -1,6 +1,17 @@
-<div class="form-group string">
-  <input class="string form-control" placeholder="记录今天搞定的任务..." type="text" id="go_to_new_task">
-</div>
+<form action="/tasks/new" method="get" id="new_task">
+  <div class="row">
+    <div class="col-xs-10">
+      <div class="form-group string">
+        <input class="string form-control" name="task[description]" placeholder="记录今天搞定的任务..." type="text" id="go_to_new_task">
+      </div>
+    </div>
+    <div class="col-xs-2">
+      <button class="btn btn-primary">
+        搞定了
+      </button>
+    </div>
+  </div>
+</form>
 
 <% if @tasks.any? %>
   <% @tasks.group_by{|t| t.finished_at.strftime("%Y-%m-%d")}.each do |date, tasks| %>
@@ -27,9 +38,3 @@
     <%= image_tag "write.png" %>
   </div>
 <% end %>
-
-<script type="text/javascript">
-  $('#go_to_new_task').on('focus', function(){
-    go_to("/tasks/new");
-  })
-</script>
