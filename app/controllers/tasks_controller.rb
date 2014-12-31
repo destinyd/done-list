@@ -22,8 +22,17 @@ class TasksController < ApplicationController
   end
 
   def create
+    new_target_description = params[:task].delete :new_target_description
+    new_target_checked = params[:task].delete :new_target_checked
     @task = current_user.tasks.new(task_params)
     if @task.save
+      if new_target_description
+        target = @task.user.targets.create(description: new_target_description)
+        if new_target_checked
+          @task.targets << target
+          @task.save
+        end
+      end
       flash[:notice] = []
       if current_user.learn '学会了创建<已完成任务>'
         flash[:notice] << t('notice.system_status_006')
@@ -59,6 +68,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:description, :finished_at, target_ids: [])
+    params.require(:task).permit(:description, :finished_at, :new_target_description, :new_target_checked, target_ids: [])
   end
 end

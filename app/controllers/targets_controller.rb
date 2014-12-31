@@ -3,6 +3,7 @@ class TargetsController < ApplicationController
   before_action :set_target, only: [:show, :edit, :update, :destroy]
 
   respond_to :html
+  respond_to :js, only: [:new]
 
   def index
     flash[:notice] = t('notice.system_status_004') if current_user.learn '发现目标列表'

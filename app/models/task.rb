@@ -6,6 +6,7 @@ class Task
   belongs_to :user
   has_and_belongs_to_many :targets
   attr_accessor :has_not_targets
+  accepts_nested_attributes_for :targets
 
   validates_presence_of :description
   validates_presence_of :finished_at
